@@ -19,7 +19,7 @@ rychlost = 10
 
 hodiny = pygame.time.Clock()
 
-logo = pygame.image.load("G:\Vys\pyton/logo.png")
+car = pygame.image.load("Lidl_car.png")
 
 okno = pygame.display.set_mode((ROZLISENI_X, ROZLISENI_Y))
 pygame.display.set_caption("Dorifo")
@@ -56,7 +56,7 @@ while True:
     class platform(pygame.sprite.Sprite):
     
         okno.fill(BILA_BARVA)
-        image = pygame.image.load('Lidl_car.png')
+        okno.blit(car, (pozice_x, pozice_y))
         
     pygame.display.update()
     hodiny.tick(FPS)
