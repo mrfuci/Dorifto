@@ -42,7 +42,10 @@ while True:
         pozice_y += rychlost
     if klavesy[pygame.K_UP]:
         pozice_y -= rychlost
-           
+    if klavesy[pygame.K_LEFT]:
+        car = pygame.transform.rotate(car, 45)
+    if klavesy[pygame.K_RIGHT]:
+        car = pygame.transform.rotate(car, -45)
     
     if pozice_x > 800 - 50:
         pozice_x = 800 - 50
