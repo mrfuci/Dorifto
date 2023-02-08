@@ -12,7 +12,7 @@ CERVENA_BARVA = (255, 0 , 0 )
 ZELENA_BARVA = ( 0, 255 , 0 )
 MODRA_BARVA = ( 0 , 0 , 255 )
 
-velikost = 50
+velikost = 25
 pozice_x = (ROZLISENI_X - velikost) / 2
 pozice_y = (ROZLISENI_Y - velikost) / 2
 rychlost = 10 
