@@ -3,6 +3,9 @@ import pygame
 
 pygame.init()
 
+logo = pygame.image.load("logo.PNG")
+pygame.display.set_icon(logo)
+
 ROZLISENI_X = 800
 ROZLISENI_Y = 600
 FPS = 60
@@ -17,9 +20,23 @@ pozice_x = (ROZLISENI_X - velikost) / 2
 pozice_y = (ROZLISENI_Y - velikost) / 2
 rychlost = 10 
 
+#class AbstractCar:
+#    def __init__(self ,max_vel, rotation_vel):
+#        self.max_vel = max_vel
+#        self.vel = 0
+#       self.rotation_vel = rotation_vel
+#        self.angle = 0
+        
+#    def rotate(self, left=False , right=False):
+#        if left:
+#            self.angle += self.rotation_vel
+#        elif right:
+#            self.angle -= self.rotation_vel
+        
 hodiny = pygame.time.Clock()
 
 car = pygame.image.load("Lidl_car.png")
+BACKGROUND = pygame.image.load("background.png")
 
 okno = pygame.display.set_mode((ROZLISENI_X, ROZLISENI_Y))
 pygame.display.set_caption("Dorifo")
@@ -43,9 +60,11 @@ while True:
     if klavesy[pygame.K_UP]:
         pozice_y -= rychlost
     if klavesy[pygame.K_LEFT]:
-        car = pygame.transform.rotate(car, 45)
+       car = pygame.transform.rotate(car, 5)
+       pozice_x -= rychlost
     if klavesy[pygame.K_RIGHT]:
-        car = pygame.transform.rotate(car, -45)
+       car = pygame.transform.rotate(car, -5)
+       pozice_x += rychlost
     
     if pozice_x > 800 - 50:
         pozice_x = 800 - 50
@@ -60,6 +79,6 @@ while True:
     
         okno.fill(BILA_BARVA)
         okno.blit(car, (pozice_x, pozice_y))
-        
+                
     pygame.display.update()
     hodiny.tick(FPS)
