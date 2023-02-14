@@ -25,11 +25,8 @@ class AbstractCar:
         self.rotation_vel = rotation_vel
         self.angle = 0
         self.x , self.y = self.START_POS
-<<<<<<< Updated upstream
-=======
         self.acceleration = 0.25
->>>>>>> Stashed changes
-        
+ 
     def rotate(self, left=False , right=False):
         if left:
             self.angle += self.rotation_vel
@@ -38,10 +35,7 @@ class AbstractCar:
             
     def draw(self,win):
         blit_rotate_center(win, self.img, (self.x, self.y), self.angle)
-<<<<<<< Updated upstream
 
-=======
-    
     def move_forward(self):
         self.vel = min(self.vel + self.acceleration, self.max_vel)
         self.move()
@@ -58,7 +52,6 @@ class AbstractCar:
         self.vel = max(self.vel - self.acceleration / 2, 0)
         self.move()
     
->>>>>>> Stashed changes
 class PlayerCar(AbstractCar):
     IMG = CAR
     START_POS = (50,50)
@@ -84,23 +77,21 @@ while run:
         if event.type == pygame.QUIT:
             run = False
             break
-<<<<<<< Updated upstream
-=======
-    
+  
     keys = pygame.key.get_pressed()
     moved = False 
     
-    if keys[pygame.K_a]:
+    if keys[pygame.K_LEFT]:
         player_car.rotate(left=True )
-    if keys[pygame.K_d]:
+    if keys[pygame.K_RIGHT]:
         player_car.rotate(right=True)
-    if keys[pygame.K_w]:
+    if keys[pygame.K_UP]:
         moved = True 
         player_car.move_forward()
         
     if not moved:
         player_car.reduce_speed()
->>>>>>> Stashed changes
+
 
 
 clock.tick(FPS)
