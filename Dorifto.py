@@ -14,7 +14,7 @@ WIDTH, HEIGHT = GROUND.get_width(), GROUND.get_height()
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Dorifto")
 
-FPS = 60
+FPS = 120
 
 
 class AbstractCar:   
@@ -23,7 +23,7 @@ class AbstractCar:
         self.max_vel = max_vel
         self.vel = 0
         self.rotation_vel = rotation_vel
-        self.angle = 0
+        self.angle = 180
         self.x , self.y = self.START_POS
         self.acceleration = 0.25
  
@@ -54,7 +54,7 @@ class AbstractCar:
     
 class PlayerCar(AbstractCar):
     IMG = CAR
-    START_POS = (50,50)
+    START_POS = (50,27)
     
 def draw(win, images, player_car):
     for img, pos in images:
@@ -66,7 +66,7 @@ def draw(win, images, player_car):
 run = True
 clock = pygame.time.Clock()
 images = [(GROUND, (0,0)), (TRACK, (0,0))]
-player_car = PlayerCar(4,4)
+player_car = PlayerCar(3,3)
 
 while run:
     clock.tick(FPS)
