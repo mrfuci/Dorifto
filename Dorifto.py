@@ -10,8 +10,11 @@ GROUND = pygame.image.load("background.png")
 TRACK = pygame.image.load("Track.png")
 CAR = pygame.image.load("Lidl_car.png")
 
+X_RES = 800
+Y_RES = 600
+
 WIDTH, HEIGHT = GROUND.get_width(), GROUND.get_height()
-WIN = pygame.display.set_mode((WIDTH, HEIGHT))
+WIN = pygame.display.set_mode((X_RES, Y_RES))
 pygame.display.set_caption("Dorifto")
 
 FPS = 120
@@ -54,7 +57,7 @@ class AbstractCar:
     
 class PlayerCar(AbstractCar):
     IMG = CAR
-    START_POS = (50,27)
+    START_POS = (52,23)
     
 def draw(win, images, player_car):
     for img, pos in images:
@@ -91,8 +94,6 @@ while run:
         
     if not moved:
         player_car.reduce_speed()
-
-
-
+       
 clock.tick(FPS)
 pygame.QUIT
