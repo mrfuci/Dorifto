@@ -80,7 +80,8 @@ while run:
         if event.type == pygame.QUIT:
             run = False
             break
-  
+
+
     keys = pygame.key.get_pressed()
     moved = False 
     
@@ -94,6 +95,8 @@ while run:
         
     if not moved:
         player_car.reduce_speed()
+    if keys[pygame.K_ESCAPE]:
+            pygame.quit()
        
 clock.tick(FPS)
 pygame.QUIT
