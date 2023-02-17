@@ -15,7 +15,7 @@ Y_RES = 600
 
 WIDTH, HEIGHT = GROUND.get_width(), GROUND.get_height()
 WIN = pygame.display.set_mode((X_RES, Y_RES))
-pygame.display.set_caption("Dorifto")
+pygame.display.set_caption("D for Dorifto")
 
 FPS = 120
 
@@ -52,7 +52,7 @@ class AbstractCar:
         self.x -= horizontal
         
     def reduce_speed(self):
-        self.vel = max(self.vel - self.acceleration / 2, 0)
+        self.vel = max(self.vel - self.acceleration / 3, 0)
         self.move()
     
 class PlayerCar(AbstractCar):
@@ -69,7 +69,7 @@ def draw(win, images, player_car):
 run = True
 clock = pygame.time.Clock()
 images = [(GROUND, (0,0)), (TRACK, (0,0))]
-player_car = PlayerCar(3,3)
+player_car = PlayerCar(4.5,4.5)
 
 while run:
     clock.tick(FPS)
