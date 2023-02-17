@@ -10,12 +10,15 @@ GROUND = pygame.image.load("background.png")
 TRACK = pygame.image.load("Track.png")
 CAR = pygame.image.load("Lidl_car.png")
 
+REX_X = 800
+RES_Y = 600
+
 WIDTH, HEIGHT = GROUND.get_width(), GROUND.get_height()
-WIN = pygame.display.set_mode((WIDTH, HEIGHT))
+WIN = pygame.display.set_mode((REX_X, RES_Y))
 pygame.display.set_caption("Dorifto")
 
 FPS = 120
-
+RACER = ()
 
 class AbstractCar:   
     def __init__(self ,max_vel, rotation_vel):
@@ -25,7 +28,7 @@ class AbstractCar:
         self.rotation_vel = rotation_vel
         self.angle = 180
         self.x , self.y = self.START_POS
-        self.acceleration = 0.25
+        self.acceleration = 0.5
  
     def rotate(self, left=False , right=False):
         if left:
@@ -66,7 +69,7 @@ def draw(win, images, player_car):
 run = True
 clock = pygame.time.Clock()
 images = [(GROUND, (0,0)), (TRACK, (0,0))]
-player_car = PlayerCar(3,3)
+player_car = PlayerCar(5,5)
 
 while run:
     clock.tick(FPS)
