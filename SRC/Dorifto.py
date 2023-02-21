@@ -8,6 +8,10 @@ pygame.display.set_icon(logo)
 
 GROUND = pygame.image.load("background.png")
 TRACK = pygame.image.load("Track.png")
+TRACK_BORDER = pygame.image.load("Track_Border.png")
+
+TRACK_BORDER_MASK = pygame.mask.from_surface(TRACK_BORDER)
+
 CAR = pygame.image.load("Lidl_car.png")
 
 X_RES = 800
@@ -43,6 +47,10 @@ class AbstractCar:
         self.vel = min(self.vel + self.acceleration, self.max_vel)
         self.move()
         
+    def move_backward(self):
+        self.vel = max(self.vel - self.acceleration, -self.max_vel/2)
+        self.move()
+        
     def move(self):
         radians = math.radians(self.angle)
         vertical = math.cos(radians) * self.vel
@@ -51,13 +59,23 @@ class AbstractCar:
         self.y -= vertical
         self.x -= horizontal
         
-    def reduce_speed(self):
-        self.vel = max(self.vel - self.acceleration / 3, 0)
-        self.move()
-    
+    def collide(self, mask, x=0, y=0):
+        car_mask = pygame.mask.from_surface(self.img)
+        offset = (int(self.x - x), int(self.y - y))
+        bp = mask.overlap(car_mask, offset)
+        return bp
+        
 class PlayerCar(AbstractCar):
     IMG = CAR
     START_POS = (52,23)
+    
+    def reduce_speed(self):
+        self.vel = max(self.vel - self.acceleration / 3, 0)
+        self.move()
+
+    def bounce(self):
+        self.vel = -self.vel
+        self.move
     
 def draw(win, images, player_car):
     for img, pos in images:
@@ -80,6 +98,11 @@ while run:
         if event.type == pygame.QUIT:
             run = False
             break
+    
+      
+    if player_car.collide(TRACK_BORDER_MASK) != None :
+        player_car.bounce()
+        
 
 
     keys = pygame.key.get_pressed()
@@ -92,11 +115,15 @@ while run:
     if keys[pygame.K_UP]:
         moved = True 
         player_car.move_forward()
+    if keys[pygame.K_DOWN]:
+        moved = True
+        player_car.move_backward()
         
     if not moved:
         player_car.reduce_speed()
+    
     if keys[pygame.K_ESCAPE]:
             pygame.quit()
-       
+             
 clock.tick(FPS)
 pygame.QUIT
