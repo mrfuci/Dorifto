@@ -97,8 +97,7 @@ while run:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
-            break
-    
+            break    
       
     if player_car.collide(TRACK_BORDER_MASK) != None :
         player_car.bounce()
