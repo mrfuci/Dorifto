@@ -1,0 +1,5 @@
+6.2.2023 initial commit + license
+8.2.2023 Start of development
+14.2.2023 Funkční řízení + very good sprity
+15.2.2023 Sprite kvalita zlepšena ale ještě ne tip top
+17.2.2023 minor changes v kódu + sprity v dobré kvalitě (asi nebudu měnit)
