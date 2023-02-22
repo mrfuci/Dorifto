@@ -7,6 +7,8 @@ logo = pygame.image.load("logo.PNG")
 pygame.display.set_icon(logo)
 
 GROUND = pygame.image.load("background.png")
+GROUND_MASK = pygame.image.load("background_mask.png")
+
 TRACK = pygame.image.load("Track.png")
 TRACK_BORDER = pygame.image.load("Track_Border.png")
 
@@ -67,7 +69,7 @@ class AbstractCar:
         
 class PlayerCar(AbstractCar):
     IMG = CAR
-    START_POS = (52,23)
+    START_POS = (53,23)
     
     def reduce_speed(self):
         self.vel = max(self.vel - self.acceleration / 3, 0)
@@ -102,7 +104,8 @@ while run:
     if player_car.collide(TRACK_BORDER_MASK) != None :
         player_car.bounce()
         
-
+#    if player_car.collide(GROUND_MASK) != None :
+#        pygame.quit
 
     keys = pygame.key.get_pressed()
     moved = False 
