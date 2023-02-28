@@ -12,7 +12,7 @@ screen = pygame.display.set_mode(size)
 
 pygame.display.set_caption("D is for Drift")
 
-bg_image = pygame.image.load("background.png")
+bg_image = pygame.image.load("Grass.png")
 Track = pygame.image.load("Track.png")
 
 bg_rect = bg_image.get_rect()
