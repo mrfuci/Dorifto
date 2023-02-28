@@ -4,3 +4,6 @@
 15.2.2023 Sprite kvalita zlepšena ale ještě ne tip top
 17.2.2023 minor changes v kódu + sprity v dobré kvalitě (asi nebudu měnit)
 21.2.2023 Předělal jsem mapu a přidal kolize s okraji mapy
+28.2.2023 Překopal jsem obrovskou část kódu abych jednodušeji implementoval driftování
+	  Musim ještě upravit mapu kvuli změně rozlišení okna, možná i upravim jak vypadá auto
+	  -kolize s okraji mapy, pravděpodobně je přidám zpět ale teď to dělat nebudu
