@@ -10,7 +10,7 @@ size = width, height = 1545, 800
 
 screen = pygame.display.set_mode(size)
 
-pygame.display.set_caption("D is for Drift")
+pygame.display.set_caption("Trutnov drift")
 
 bg_image = pygame.image.load("Grass.png")
 Track = pygame.image.load("Track.png")
@@ -25,13 +25,13 @@ car_image = pygame.image.load("Lidl_car.png")
 
 class Car:
     def __init__(self, image):
-        self.x = 58
+        self.x = 60
         self.y = 43
         self.image = image
         self.perm_image = image
         self.angle = 1
         self.direction = 180
-        self.speed = 0.1
+        self.speed = 1.5
         self.antispeed = 1
         self.x_shift = 0
         self.y_shift = 0
@@ -39,7 +39,7 @@ class Car:
         self.acc_mult = 0.25
         self.drift = False
         self.drift_distance = 0
-        self.colliding = False
+        self.colliding = True 
 
     def display(self, screen):
         direction = self.direction*-1
@@ -54,7 +54,7 @@ class Car:
 
     def check_wall_collision(self, needle):
         collision = False
-        if self.x > 2175:
+        if self.x > 1520:
             self.speed = 0.5
             if needle.degrees_from_0 < 120:
                 needle.degrees_from_0 += 8
@@ -67,7 +67,7 @@ class Car:
             self.x += self.speed
 
 
-        if self.y > 1175:
+        if self.y > 780:
             self.speed = 1
             self.y -= self.speed
             if needle.degrees_from_0 < 120:
@@ -89,7 +89,7 @@ class Car:
 
     def drive(self):
         if self.speed == 0:
-            self.speed = 0.2
+            self.speed = 10
         change_x = math.cos(math.radians(int(90 - self.direction))) * self.speed
         change_y = math.sin(math.radians(int(90 - self.direction))) * self.speed
 
@@ -101,7 +101,7 @@ class Car:
     def accelerate(self, needle):
         self.speed2 = self.speed
         if self.speed < 1:
-            self.acc_mult = 1.025
+            self.acc_mult = 10.025
         elif self.speed < 3:
             self.acc_mult = 1.025
         elif self.speed < 4:
@@ -186,7 +186,7 @@ y_shift = 0
 
 prev = datetime.utcnow()
 prev_fps_switch = datetime.utcnow()
-FPS = 60
+FPS =   0
 fps_toggle = False
 
 
