@@ -197,7 +197,8 @@ while True:
     
     if keys[pygame.K_ESCAPE]:
         pygame.QUIT
-    
+        exit()
+        
     FPS += 1
     if datetime.utcnow() - prev > timedelta(seconds=1):
         prev = datetime.utcnow()
@@ -268,9 +269,7 @@ while True:
 
             if car.drift_distance > 0:
                 car.drift_distance = 0
-    if keys[pygame.K_ESCAPE]:
-        pygame.QUIT
-        
+    
 
     if int(car.speed*10) % 2 == 0:
         speed_text.text = f"{int(car.speed*10)}"
@@ -283,8 +282,10 @@ while True:
     screen.blit(Track, T_rect)
     car.display(screen)
 
-
-
+    if car.speed == 0:
+        pygame.QUIT
+        quit()
+        
     if fps_toggle:
         fps.display(screen)
 
