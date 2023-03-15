@@ -6,7 +6,7 @@ pygame.init()
 logo = pygame.image.load("logo.png")
 pygame.display.set_icon(logo)
 
-size = width, height = 1545, 800
+size = width, height = 1729, 800
 
 screen = pygame.display.set_mode(size)
 
@@ -67,7 +67,7 @@ class Car:
             self.x += self.speed
 
 
-        if self.y > 780:
+        if self.y > 745:
             self.speed = 1
             self.y -= self.speed
             if needle.degrees_from_0 < 120:
@@ -80,16 +80,26 @@ class Car:
             self.y += self.speed
 
 
-        if self.y < 35 or self.y > 1165 or self.x < 35 or self.x > 2165:
+        if self.y < 35 or self.y > 1500 or self.x < 35 or self.x > 1500:
             collision = True
 
         self.colliding = collision
-
-
-
+        
+        while collision == True:
+            print("You crashed!")
+            exit()
+        
+        if self.y > 740 :
+            print("You crashed!")
+            exit()
+        
+        if self.x < 50 :
+            print("You crashed!")
+            exit()
+            
     def drive(self):
         if self.speed == 0:
-            self.speed = 10
+            self.speed = 0
         change_x = math.cos(math.radians(int(90 - self.direction))) * self.speed
         change_y = math.sin(math.radians(int(90 - self.direction))) * self.speed
 
@@ -186,11 +196,11 @@ y_shift = 0
 
 prev = datetime.utcnow()
 prev_fps_switch = datetime.utcnow()
-FPS =   0
+FPS =   1
 fps_toggle = False
 
 
-
+    
 
 while True:
     keys = pygame.key.get_pressed()
@@ -281,11 +291,7 @@ while True:
     screen.blit(bg_image, bg_rect)
     screen.blit(Track, T_rect)
     car.display(screen)
-
-    if car.speed == 0:
-        pygame.QUIT
-        quit()
-        
+       
     if fps_toggle:
         fps.display(screen)
 
