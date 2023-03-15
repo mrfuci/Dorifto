@@ -22,6 +22,7 @@ T_rect = Track.get_rect()
 needle_image = pygame.image.load("Needle.png")
 speedometer_image = pygame.image.load("Speedometer.png")
 car_image = pygame.image.load("Lidl_car.png")
+#burunyuuu = pygame.image.load("burunyuu.png")
 
 class Car:
     def __init__(self, image):
@@ -96,6 +97,7 @@ class Car:
         if self.x < 50 :
             print("You crashed!")
             exit()
+            #screen.blit(burunyuuu, (100,0))
             
     def drive(self):
         if self.speed == 0:
@@ -186,8 +188,8 @@ class Needle:
 needle = Needle(x=125, y=130, image=needle_image)
 car = Car(image=car_image)
 speedometer = Speedometer(speedometer_image)
-fps = Data_Sign(x=2150, y=30, text="FPS", color = (255, 255, 255), size=20)
-speed_text = Data_Sign(x= 130, y=125, text=f"6", color=(255, 255, 255), size=80)
+fps = Data_Sign(x=1729, y=800, text="FPS", color = (255, 255, 255), size=20)
+speed_text = Data_Sign(x= 1729, y=800, text=f"6", color=(255, 255, 255), size=80)
 
 
 rotation_shift = 0
@@ -196,7 +198,7 @@ y_shift = 0
 
 prev = datetime.utcnow()
 prev_fps_switch = datetime.utcnow()
-FPS =   1
+FPS = 0
 fps_toggle = False
 
 
@@ -215,7 +217,7 @@ while True:
         fps.text = f"FPS: {FPS}"
         FPS = 0
 
-    if keys[pygame.K_LSUPER] and keys[pygame.K_LALT]:
+    if keys[pygame.K_l] and keys[pygame.K_t]:
         if datetime.utcnow() - prev_fps_switch > timedelta(seconds=0.3):
             prev_fps_switch = datetime.utcnow()
             if fps_toggle == True:
@@ -258,7 +260,8 @@ while True:
 
     if keys[pygame.K_s]:
         car.brake()
-
+    if keys[pygame.K_w] and keys[pygame.K_LSHIFT]:
+        car.speed = 10
 
     if (keys[pygame.K_SPACE] and keys[pygame.K_a] or keys[pygame.K_d]) or (car.speed > 6 and keys[pygame.K_a] or keys[pygame.K_d]) and not keys[pygame.K_s]:
         if keys[pygame.K_a] and car.drift_distance < 50:
