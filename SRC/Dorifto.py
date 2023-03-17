@@ -261,7 +261,7 @@ while True:
     if keys[pygame.K_s]:
         car.brake()
     if keys[pygame.K_w] and keys[pygame.K_LSHIFT]:
-        car.speed = 10
+        car.speed = 8.25
 
     if (keys[pygame.K_SPACE] and keys[pygame.K_a] or keys[pygame.K_d]) or (car.speed > 6 and keys[pygame.K_a] or keys[pygame.K_d]) and not keys[pygame.K_s]:
         if keys[pygame.K_a] and car.drift_distance < 50:
@@ -299,4 +299,3 @@ while True:
         fps.display(screen)
 
     pygame.display.update()
-
