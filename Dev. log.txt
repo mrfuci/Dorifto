@@ -7,3 +7,6 @@
 28.2.2023 Překopal jsem obrovskou část kódu abych jednodušeji implementoval driftování
 	  Musim ještě upravit mapu kvuli změně rozlišení okna, možná i upravim jak vypadá auto
 	  -kolize s okraji mapy, pravděpodobně je přidám zpět ale teď to dělat nebudu
+17.3.2023 -> 20.3.2023
+Vpodstatě mám už hotovou jednu funkci (Srážka s bílím okrajem = crash hry)
+Potřebuji ještě udělat počítač score při driftu
