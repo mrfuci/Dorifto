@@ -6,7 +6,7 @@ pygame.init()
 logo = pygame.image.load("logo.png")
 pygame.display.set_icon(logo)
 
-size = width, height = 1545, 800
+size = width, height = 1729, 800
 
 screen = pygame.display.set_mode(size)
 
@@ -22,6 +22,7 @@ T_rect = Track.get_rect()
 needle_image = pygame.image.load("Needle.png")
 speedometer_image = pygame.image.load("Speedometer.png")
 car_image = pygame.image.load("Lidl_car.png")
+#burunyuuu = pygame.image.load("burunyuu.png")
 
 class Car:
     def __init__(self, image):
@@ -67,7 +68,7 @@ class Car:
             self.x += self.speed
 
 
-        if self.y > 780:
+        if self.y > 745:
             self.speed = 1
             self.y -= self.speed
             if needle.degrees_from_0 < 120:
@@ -80,16 +81,27 @@ class Car:
             self.y += self.speed
 
 
-        if self.y < 35 or self.y > 1165 or self.x < 35 or self.x > 2165:
+        if self.y < 35 or self.y > 1500 or self.x < 35 or self.x > 1500:
             collision = True
 
         self.colliding = collision
-
-
-
+        
+        while collision == True:
+            print("You crashed!")
+            exit()
+        
+        if self.y > 740 :
+            print("You crashed!")
+            exit()
+        
+        if self.x < 50 :
+            print("You crashed!")
+            exit()
+            #screen.blit(burunyuuu, (100,0))
+            
     def drive(self):
         if self.speed == 0:
-            self.speed = 10
+            self.speed = 0
         change_x = math.cos(math.radians(int(90 - self.direction))) * self.speed
         change_y = math.sin(math.radians(int(90 - self.direction))) * self.speed
 
@@ -176,8 +188,8 @@ class Needle:
 needle = Needle(x=125, y=130, image=needle_image)
 car = Car(image=car_image)
 speedometer = Speedometer(speedometer_image)
-fps = Data_Sign(x=2150, y=30, text="FPS", color = (255, 255, 255), size=20)
-speed_text = Data_Sign(x= 130, y=125, text=f"6", color=(255, 255, 255), size=80)
+fps = Data_Sign(x=1729, y=800, text="FPS", color = (255, 255, 255), size=20)
+speed_text = Data_Sign(x= 1729, y=800, text=f"6", color=(255, 255, 255), size=80)
 
 
 rotation_shift = 0
@@ -186,11 +198,11 @@ y_shift = 0
 
 prev = datetime.utcnow()
 prev_fps_switch = datetime.utcnow()
-FPS =   0
+FPS = 0
 fps_toggle = False
 
 
-
+    
 
 while True:
     keys = pygame.key.get_pressed()
@@ -205,7 +217,7 @@ while True:
         fps.text = f"FPS: {FPS}"
         FPS = 0
 
-    if keys[pygame.K_LSUPER] and keys[pygame.K_LALT]:
+    if keys[pygame.K_l] and keys[pygame.K_t]:
         if datetime.utcnow() - prev_fps_switch > timedelta(seconds=0.3):
             prev_fps_switch = datetime.utcnow()
             if fps_toggle == True:
@@ -248,7 +260,8 @@ while True:
 
     if keys[pygame.K_s]:
         car.brake()
-
+    if keys[pygame.K_w] and keys[pygame.K_LSHIFT]:
+        car.speed = 8.25
 
     if (keys[pygame.K_SPACE] and keys[pygame.K_a] or keys[pygame.K_d]) or (car.speed > 6 and keys[pygame.K_a] or keys[pygame.K_d]) and not keys[pygame.K_s]:
         if keys[pygame.K_a] and car.drift_distance < 50:
@@ -281,13 +294,8 @@ while True:
     screen.blit(bg_image, bg_rect)
     screen.blit(Track, T_rect)
     car.display(screen)
-
-    if car.speed == 0:
-        pygame.QUIT
-        quit()
-        
+       
     if fps_toggle:
         fps.display(screen)
 
     pygame.display.update()
-
