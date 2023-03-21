@@ -1,8 +1,12 @@
-import sys, pygame, time, asyncio, threading, math
+import sys, pygame, time, asyncio, threading, math, os
 from datetime import datetime, timedelta
+
+score = 0
+score_increment = 1
 
 pygame.init()
 
+font = pygame.font.Font(None, 25)
 logo = pygame.image.load("logo.png")
 pygame.display.set_icon(logo)
 
@@ -13,20 +17,16 @@ screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Trutnov drift")
 
 bg_image = pygame.image.load("Grass.png")
-Track = pygame.image.load("Track.png")
 
 bg_rect = bg_image.get_rect()
-T_rect = Track.get_rect()
-
 
 needle_image = pygame.image.load("Needle.png")
 speedometer_image = pygame.image.load("Speedometer.png")
 car_image = pygame.image.load("Lidl_car.png")
-#burunyuuu = pygame.image.load("burunyuu.png")
 
 class Car:
     def __init__(self, image):
-        self.x = 60
+        self.x = 57
         self.y = 43
         self.image = image
         self.perm_image = image
@@ -74,7 +74,7 @@ class Car:
             if needle.degrees_from_0 < 120:
                 needle.degrees_from_0 += 8
 
-        if self.y < 25:
+        if self.y < 20:
             self.speed = 1
             if needle.degrees_from_0 < 120:
                 needle.degrees_from_0 += 8
@@ -89,15 +89,16 @@ class Car:
         while collision == True:
             print("You crashed!")
             exit()
+            
         
         if self.y > 740 :
             print("You crashed!")
             exit()
         
+        
         if self.x < 50 :
             print("You crashed!")
             exit()
-            #screen.blit(burunyuuu, (100,0))
             
     def drive(self):
         if self.speed == 0:
@@ -198,8 +199,8 @@ y_shift = 0
 
 prev = datetime.utcnow()
 prev_fps_switch = datetime.utcnow()
-FPS = 0
-fps_toggle = False
+FPS = 120
+fps_toggle = True 
 
 
     
@@ -283,19 +284,23 @@ while True:
             if car.drift_distance > 0:
                 car.drift_distance = 0
     
-
+    if keys[pygame.K_w] and keys[pygame.K_d]:
+        score += score_increment
+    
+    if keys[pygame.K_w] and keys[pygame.K_a]:
+        score += score_increment
+            
     if int(car.speed*10) % 2 == 0:
         speed_text.text = f"{int(car.speed*10)}"
 
+    score_text = font.render(f"Score: {score}", True , (255,255,255))
+    
     car.check_wall_collision(needle)
 
     car.drive()
     car.rotate(rotation_shift)
     screen.blit(bg_image, bg_rect)
-    screen.blit(Track, T_rect)
     car.display(screen)
-       
-    if fps_toggle:
-        fps.display(screen)
-
+    screen.blit(score_text,(1590,700))
+        
     pygame.display.update()
