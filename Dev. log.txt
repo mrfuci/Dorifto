@@ -10,3 +10,7 @@
 17.3.2023 -> 20.3.2023
 Vpodstatě mám už hotovou jednu funkci (Srážka s bílím okrajem = crash hry)
 Potřebuji ještě udělat počítač score při driftu
+
+21.3.2023 + 22.3.2023 
+Upravuji funkce aby byli ve funkčním stavu
+Ale jinak mám v podstatě hotovo
