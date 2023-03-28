@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 
 score = 0
 score_increment = 1
+score_increment_fast = 2
 
 pygame.init()
 
@@ -56,7 +57,7 @@ class Car:
     def check_wall_collision(self, needle):
         collision = False
         if self.x > 1520:
-            self.speed = 0.5
+            self.speed = 1.5
             if needle.degrees_from_0 < 120:
                 needle.degrees_from_0 += 8
             self.x -= self.speed
@@ -259,7 +260,7 @@ while True:
         rotation_shift = 0
 
     if keys[pygame.K_w]:
-        car.accelerate(needle)
+        car.speed = 4
     else:
         car.drop_speed(needle)
 
@@ -267,7 +268,7 @@ while True:
         car.brake()
     if keys[pygame.K_w] and keys[pygame.K_LSHIFT]:
         car.speed = 8.25
-
+    
     if (keys[pygame.K_SPACE] and keys[pygame.K_a] or keys[pygame.K_d]) or (car.speed > 6 and keys[pygame.K_a] or keys[pygame.K_d]) and not keys[pygame.K_s]:
         if keys[pygame.K_a] and car.drift_distance < 50:
             car.drift_distance += 1
@@ -294,7 +295,15 @@ while True:
     
     if keys[pygame.K_SPACE] and keys[pygame.K_a]:
         score += score_increment
-            
+    
+    if keys[pygame.K_LSHIFT] and keys[pygame.K_SPACE] and keys[pygame.K_a]:
+        score + score_increment_fast
+    
+    if keys[pygame.K_LSHIFT] and keys[pygame.K_SPACE] and keys[pygame.K_d]:
+        score + score_increment_fast
+    
+    
+    
     if int(car.speed*10) % 2 == 0:
         speed_text.text = f"{int(car.speed*10)}"
 
@@ -312,8 +321,7 @@ while True:
     screen.blit(bg_image, bg_rect)
     car.display(screen)
     screen.blit(score_text,(1590,700))
-    gaymouvr == screen.blit(
-   
+              
     if score >= 69:
         screen.blit(ach1,(20,780))
     if score >= 1000:
