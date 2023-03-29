@@ -21,4 +21,4 @@ S posledním komitem jsem přidal dráhu na mapu která není povinná pro poč�
 
 29.2.2023
 Hotovo 
-+ už jsem vymyslel jméno se kterým jsem spokojený "Pygame Driftmaster"
++vymyslel jsem jméno se kterým jsem spokojený "Pygame Driftmaster"
