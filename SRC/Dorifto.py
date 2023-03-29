@@ -15,7 +15,7 @@ size = width, height = 1729, 800
 
 screen = pygame.display.set_mode(size)
 
-pygame.display.set_caption("Trutnov drift (Space +  Direction to drift)")
+pygame.display.set_caption("Drift (Space +  Direction to drift)")
 
 bg_image = pygame.image.load("Grass.png")
 
@@ -24,6 +24,8 @@ bg_rect = bg_image.get_rect()
 needle_image = pygame.image.load("Needle.png")
 speedometer_image = pygame.image.load("Speedometer.png")
 car_image = pygame.image.load("Lidl_car.png")
+crash = pygame.image.load("crash.png")
+
 
 class Car:
     def __init__(self, image):
@@ -87,23 +89,28 @@ class Car:
 
         self.colliding = collision
         
+        car.drive()
+        car.rotate(rotation_shift)
+        screen.blit(bg_image, bg_rect)
+        car.display(screen)
+        screen.blit(score_text,(1590,700))
                 
         if self.y < 40 :
             print("You crashed!")
-            exit()
+            screen.blit(crash, (0,0))
         
         if self.y > 740 :
             print("You crashed!")
-            exit()
+            
         
         
         if self.x < 50 :
             print("You crashed!")
-            exit()
+            
             
         if self.x > 1488:
             print("You crashed!")
-            exit()
+            
             
     def drive(self):
         if self.speed == 0:
@@ -196,7 +203,7 @@ car = Car(image=car_image)
 speedometer = Speedometer(speedometer_image)
 fps = Data_Sign(x=1729, y=800, text="FPS", color = (255, 255, 255), size=20)
 speed_text = Data_Sign(x= 1729, y=800, text=f"6", color=(255, 255, 255), size=80)
-
+    
 
 rotation_shift = 1
 x_shift = 1
@@ -267,13 +274,13 @@ while True:
     if keys[pygame.K_s]:
         car.brake()
     if keys[pygame.K_w] and keys[pygame.K_LSHIFT]:
-        car.speed = 8.25
+        car.speed = 7.25
     
     if (keys[pygame.K_SPACE] and keys[pygame.K_a] or keys[pygame.K_d]) or (car.speed > 6 and keys[pygame.K_a] or keys[pygame.K_d]) and not keys[pygame.K_s]:
         if keys[pygame.K_a] and car.drift_distance < 50:
-            car.drift_distance += 1
+            car.drift_distance += 1.5
         elif keys[pygame.K_d] and car.drift_distance > -50:
-            car.drift_distance -= 1
+            car.drift_distance -= 1.5
     else:
         if car.drift_distance > 0:
             car.drift_distance -= 1
@@ -301,35 +308,28 @@ while True:
     
     if keys[pygame.K_LSHIFT] and keys[pygame.K_SPACE] and keys[pygame.K_d]:
         score + score_increment_fast
+        
     
-    
-    
-    if int(car.speed*10) % 2 == 0:
-        speed_text.text = f"{int(car.speed*10)}"
-
     score_text = font.render(f"Score: {score}", True , (255,255,255))
     
-    ach1 = font.render(f"Achievment 1", True, (255,255,255))
-    ach2 = font.render(f"Achievment 2", True, (255,255,255))
-    ach3 = font.render(f"Achievment 3", True, (255,255,255))
-    ach4 = font.render(f"Achievment 4", True, (255,255,255))
+    ach1 = font.render(f"Achievment 1: Nice (69 score)", True, (255,255,255))
+    ach2 = font.render(f"Achievment 2: Real drifter (1000 score)", True, (255,255,255))
+    ach3 = font.render(f"Achievment 3: Get a life, please (10 000 score)", True, (255,255,255))
+    ach4 = font.render(f"Achievment 4: stop (100 000 score)", True, (255,255,255))
     
     car.check_wall_collision(needle)
    
-    car.drive()
-    car.rotate(rotation_shift)
-    screen.blit(bg_image, bg_rect)
-    car.display(screen)
-    screen.blit(score_text,(1590,700))
+      
+
               
     if score >= 69:
-        screen.blit(ach1,(20,780))
+        screen.blit(ach1,(25,780))
     if score >= 1000:
-         screen.blit(ach2,(170,780))
+         screen.blit(ach2,(280,780))
     if score >= 10000:
-        screen.blit(ach3,(320,780))
+        screen.blit(ach3,(620,780))
     if score >= 100000:
-        screen.blit(ach4,(470,780))
+        screen.blit(ach4,(1018,780))
 
         
     pygame.display.update()
