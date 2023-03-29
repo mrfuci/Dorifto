@@ -15,7 +15,7 @@ size = width, height = 1729, 800
 
 screen = pygame.display.set_mode(size)
 
-pygame.display.set_caption("Drift (Space +  Direction to drift)")
+pygame.display.set_caption("Pygame Driftmaster (Space +  Direction to drift)")
 
 bg_image = pygame.image.load("Grass.png")
 
@@ -96,21 +96,17 @@ class Car:
         screen.blit(score_text,(1590,700))
                 
         if self.y < 40 :
-            print("You crashed!")
             screen.blit(crash, (0,0))
         
         if self.y > 740 :
-            print("You crashed!")
-            
+            screen.blit(crash, (0,0))
         
         
         if self.x < 50 :
-            print("You crashed!")
-            
+            screen.blit(crash, (0,0))
             
         if self.x > 1488:
-            print("You crashed!")
-            
+            screen.blit(crash, (0,0))
             
     def drive(self):
         if self.speed == 0:
@@ -319,9 +315,6 @@ while True:
     
     car.check_wall_collision(needle)
    
-      
-
-              
     if score >= 69:
         screen.blit(ach1,(25,780))
     if score >= 1000:
