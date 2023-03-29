@@ -17,3 +17,5 @@ Ale jinak mám v podstatě hotovo
 28.2.2023
 Řekl bych že už to je hotové (v hratelném stavu)
 S posledním komitem jsem přidal dráhu na mapu která není povinná pro počítání skóre
+29.2.2023
+Ještě není hotovo ale už se blížím
